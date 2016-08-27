@@ -16,11 +16,11 @@ DemoBot.prototype.respond = function(params, callback) {
   "use strict";
   callback({
     contentType: "application/json",
-    text: "{\"text\": \"I am the MensaBot\"}",
+    text: "{\"text\": \"I am the DemoBot\"}",
   });
 };
 
 /*
- * When required each bot module must return a valid object with at least a `espond` function	
+ * When required each bot module must return a valid object with at least a `respond` function	
  */
 module.exports = new DemoBot();
