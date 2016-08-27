@@ -4,9 +4,10 @@
   var express = require("express"),
     request = require("request"),
     that = {},
+    MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember", ],
     WEEKDAYS = ["so", "mo", "di", "mi", "do", "fr", "sa", ],
+    WEEKDAYS_FULL = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", ],
     MENSA_API_URL = "http://api.regensburger-forscher.de/mensa/uni/{{day}}",
-    WEEKEND_MESSAGE = "https://www.youtube.com/watch?v=3trhF-09DEk",
     app;
 
   function onMensaDataRequested(req, res) {
@@ -22,20 +23,33 @@
     var menu, url = MENSA_API_URL.replace("{{day}}", currentDay);
     request(url, function(error, response, body) {
       menu = getFormatedMenu(body);
-      res.send("Heute in der Mensa:\n"+menu);
+      res.header("Content-Type", "application/json");
+      res.end(menu);
     });
   }
 
   function getFormatedMenu(menu) {
-    var index, menulist = JSON.parse(menu),result = "";
+    var index, menulist = JSON.parse(menu),
+      date = new Date(),
+      dateString = WEEKDAYS_FULL[date.getDay()] + ", den " + date.getUTCDate() + ". " + MONTHS[date.getUTCMonth()],
+      result = {
+        response_type: "ephemeral",
+        text: "---\n#### Speiseplan der Uni-Mensa für " + dateString + "\n| Kategorie     | Gericht     | Labels |\n|:--------------|:------------|:-------\n",
+      };
     for (index = 0; index < menulist.length; index++) {
-      result += "[" + menulist[index].category + "]\t" + menulist[index].name + " (" + menulist[index].labels + ")\n";
+      result.text += "| " + menulist[index].category + " | " + menulist[index].name + " | " + menulist[index].labels + " |\n";
     }
-    return result;
+    result.text += "---";
+    return JSON.stringify(result);
   }
 
   function sendIsWeekendMessage(res) {
-    res.send(WEEKEND_MESSAGE);
+    var result = {
+      response_type: "ephemeral",
+      text: "Es ist Wochende. Die Mensa hat zu. Arbeite nicht: https://www.youtube.com/watch?v=3trhF-09DEk",
+    };
+    res.header("Content-Type", "application/json");
+    res.end(JSON.stringify(result));
   }
 
   function run() {
