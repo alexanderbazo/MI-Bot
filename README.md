@@ -1,6 +1,8 @@
 # MiBot
 A simple API for slack/mettermost *Slash Commands* used by the Media Informatics Group
 
+** Slack rendert kein Markdown. Die Antworten der Bots sind daher möglicherweise schlecht lesbar. Als Workaround könnten Bilder erstellt und als Attatchment in den Chat gesendet werden.**
+
 ## Nutzung in Slack/Mattermost
 
 **Aktuell stehen folgende Bots zur Verfügung:**
@@ -10,6 +12,12 @@ A simple API for slack/mettermost *Slash Commands* used by the Media Informatics
 Der MensaBot zeigt den Speiseplan der Uni-Mensa für den aktuellen Tag an. Der Bot kann in den Slack/Mattermost-Teams der Medieninformatik über das Kommando `/mensa` aufgerufen werden.
 
 <img alt="Screenshot der Antwort des MensaBots" src="http://i.imgur.com/LBfrnEs.png" width="50%">
+
+**Phonebot**
+
+Der Phonebot sucht im Telefonverzeichnis der Universität Regensburg. Der Bot kann in den Slack/Mattermost-Teams der Medieninformatik über das Kommando `/phone [Name]` aufgerufen werden.
+
+<img alt="Screenshot der Antwort des Phonebot" src="http://i.imgur.com/9VG9NVe.png" width="50%">
 
 ## Bots entwickeln
 Zur Integration eigener Bots besteht eine simple API:

@@ -9,8 +9,8 @@
     app;
 
   function handleRequestWithBot(bot, req, res) {
-    console.log(req.body);
-    bot.respond(undefined, function(response) {
+    var params = req.body.text || undefined;
+    bot.respond(params, function(response) {
       res.header("Content-Type", response.contentType);
       res.end(response.text);
     });
@@ -21,7 +21,7 @@
     console.log("Starting mibot"); // eslint-disable-line no-console
     app = express();
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({ extended: true, }));
     app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
     app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
     app.listen(port);
