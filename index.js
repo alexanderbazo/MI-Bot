@@ -3,6 +3,7 @@
   "use strict";
   var express = require("express"),
     MensaBot = require("./lib/mensabot/"),
+    PhoneBot = require("./lib/phonebot/"),
     that = {},
     app;
 
@@ -18,6 +19,7 @@
     console.log("Starting mibot"); // eslint-disable-line no-console
     app = express();
     app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
+    app.get("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
     app.listen(port);
   }
 
