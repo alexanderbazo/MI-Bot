@@ -19,7 +19,7 @@
     console.log("Starting mibot"); // eslint-disable-line no-console
     app = express();
     app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
-    app.get("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
+    app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
     app.listen(port);
   }
 
