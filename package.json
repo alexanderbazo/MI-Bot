@@ -6,7 +6,9 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "iconv-lite": "^0.4.13",
     "jsdom": "^9.4.2",
+    "jsesc": "^2.2.0",
     "request": "^2.74.0"
   },
   "devDependencies": {},
