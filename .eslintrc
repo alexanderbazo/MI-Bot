@@ -5,8 +5,8 @@
             "always"
         ],
         "indent": [
-            4,
             2,
+            4,
             {"SwitchCase": 1}
         ],
         "max-nested-callbacks": [

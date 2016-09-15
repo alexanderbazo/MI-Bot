@@ -14,25 +14,20 @@
         that = {},
         app;
 
-
     function sendIntermediateMessage(res) {
         res.header("Content-Type", "application/json");
         res.end(JSON.stringify(INTERMEDIATE_RESPONSE));
     }
 
     function sendResponseMessage(url, response) {
-      console.log(url);
-      console.log(response);
         var options = {
             url: url,
             contentType: response.contentType,
             body: response.text,
-            method: 'post'
+            method: "post",
         };
 
-        request(options, function(error, response, body) {
-            //console.log(error, response, body);
-        });
+        request(options, function() {});
     }
 
     function handleRequestWithBot(bot, req, res) {
@@ -40,9 +35,9 @@
             responseUrl = req.param("response_url");
         sendIntermediateMessage(res);
         bot.respond(params, function(response) {
-          sendResponseMessage(responseUrl, response);
-          //res.header("Content-Type", response.contentType);
-          //res.end(response.text);
+            sendResponseMessage(responseUrl, response);
+            //res.header("Content-Type", response.contentType);
+            //res.end(response.text);
         });
     }
 
