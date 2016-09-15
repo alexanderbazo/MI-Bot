@@ -20,14 +20,27 @@
         res.end(response.text);
     }
 
+    function sendResultMessage(url, result) {
+        var options = {
+            url: url,
+            contentType: "application/json"
+            body: result,
+            json: true,
+            method: 'post'
+        };
+        request(options, function(error, response, body) {
+            console.log(error);
+        });
+    }
+
     function handleRequestWithBot(bot, req, res) {
         var params = req.body.text || undefined,
             responseUrl = req.param("response_url");
-        console.log(responseUrl);
-        console.log(req.originalUrl);
+        sendIntermediateMessage(res);
         bot.respond(params, function(response) {
-            res.header("Content-Type", response.contentType);
-            res.end(response.text);
+          sendResultMessage(responseUrl, response);
+          //res.header("Content-Type", response.contentType);
+          //res.end(response.text);
         });
     }
 
