@@ -28,8 +28,9 @@
             json: true,
             method: 'post'
         };
+        
         request(options, function(error, response, body) {
-            console.log(error);
+            console.log(error, reponse, body);
         });
     }
 
