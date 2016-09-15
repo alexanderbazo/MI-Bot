@@ -17,14 +17,14 @@
 
     function sendIntermediateMessage(res) {
         res.header("Content-Type", "application/json");
-        res.end(JSON.parse(INTERMEDIATE_RESPONSE));
+        res.end(JSON.stringify(INTERMEDIATE_RESPONSE));
     }
 
-    function sendResultMessage(url, result) {
+    function sendResponseMessage(url, response) {
         var options = {
             url: url,
-            contentType: "application/json",
-            body: result,
+            contentType: response.contentType,
+            body: response.contentType,
             json: true,
             method: 'post'
         };
@@ -38,7 +38,7 @@
             responseUrl = req.param("response_url");
         sendIntermediateMessage(res);
         bot.respond(params, function(response) {
-          sendResultMessage(responseUrl, response);
+          sendResponseMessage(responseUrl, response);
           //res.header("Content-Type", response.contentType);
           //res.end(response.text);
         });
