@@ -22,7 +22,7 @@
 
     function handleRequestWithBot(bot, req, res) {
         var params = req.body.text || undefined,
-            responseUrl = req.param["response_url"];
+            responseUrl = req.param("response_url");
         console.log(responseUrl);
         bot.respond(params, function(response) {
             res.header("Content-Type", response.contentType);
