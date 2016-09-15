@@ -1,34 +1,47 @@
 /* eslint-env node */
 (function() {
-  "use strict";
-  var express = require("express"),
-    bodyParser = require("body-parser"),
-    MensaBot = require("./lib/mensabot/"),
-    PhoneBot = require("./lib/phonebot/"),
-    OpacBot = require("./lib/opacbot/"),
-    that = {},
-    app;
+    "use strict";
+    var express = require("express"),
+        request = require("request"),
+        bodyParser = require("body-parser"),
+        MensaBot = require("./lib/mensabot/"),
+        PhoneBot = require("./lib/phonebot/"),
+        OpacBot = require("./lib/opacbot/"),
+        INTERMEDIATE_RESPONSE = {
+            response_type: "ephemeral",
+            text: "Einen Augenblick bitte. Die Antwort wird erstellt.",
+        },
+        that = {},
+        app;
 
-  function handleRequestWithBot(bot, req, res) {
-    var params = req.body.text || undefined;
-    bot.respond(params, function(response) {
-      res.header("Content-Type", response.contentType);
-      res.end(response.text);
-    });
-  }
 
-  function run() {
-    var port = parseInt(process.argv[2]);
-    console.log("Starting mibot"); // eslint-disable-line no-console
-    app = express();
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true, }));
-    app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
-    app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
-    app.post("/slack/opac", handleRequestWithBot.bind(this, OpacBot));
-    app.listen(port);
-  }
+    function sendIntermediateMessage(res) {
+        res.header("Content-Type", response.contentType);
+        res.end(response.text);
+    }
 
-  that.run = run;
-  return that;
+    function handleRequestWithBot(bot, req, res) {
+        var params = req.body.text || undefined,
+            responseUrl = req.param["response_url"];
+        console.log(responseUrl);
+        bot.respond(params, function(response) {
+            res.header("Content-Type", response.contentType);
+            res.end(response.text);
+        });
+    }
+
+    function run() {
+        var port = parseInt(process.argv[2]);
+        console.log("Starting mibot"); // eslint-disable-line no-console
+        app = express();
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: true, }));
+        app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
+        app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
+        app.post("/slack/opac", handleRequestWithBot.bind(this, OpacBot));
+        app.listen(port);
+    }
+
+    that.run = run;
+    return that;
 }().run());
