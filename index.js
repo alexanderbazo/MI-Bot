@@ -23,7 +23,7 @@
     function sendResultMessage(url, result) {
         var options = {
             url: url,
-            contentType: "application/json"
+            contentType: "application/json",
             body: result,
             json: true,
             method: 'post'
