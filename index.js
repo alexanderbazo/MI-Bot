@@ -25,7 +25,7 @@
     app.use(bodyParser.urlencoded({ extended: true, }));
     app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
     app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
-    app.get("/slack/opac", handleRequestWithBot.bind(this, OpacBot));
+    app.post("/slack/opac", handleRequestWithBot.bind(this, OpacBot));
     app.listen(port);
   }
 
