@@ -16,7 +16,7 @@
 
 
     function sendIntermediateMessage(res) {
-        res.header("Content-Type", response.contentType);
+        res.header("Content-Type", "application/json");
         res.end(response.text);
     }
 
