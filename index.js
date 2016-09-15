@@ -5,6 +5,7 @@
     bodyParser = require("body-parser"),
     MensaBot = require("./lib/mensabot/"),
     PhoneBot = require("./lib/phonebot/"),
+    OpacBot = require("./lib/opacbot/"),
     that = {},
     app;
 
@@ -24,6 +25,7 @@
     app.use(bodyParser.urlencoded({ extended: true, }));
     app.get("/slack/mensa", handleRequestWithBot.bind(this, MensaBot));
     app.post("/slack/phone", handleRequestWithBot.bind(this, PhoneBot));
+    app.get("/slack/opac", handleRequestWithBot.bind(this, OpacBot));
     app.listen(port);
   }
 
