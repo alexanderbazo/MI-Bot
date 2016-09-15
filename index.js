@@ -26,7 +26,7 @@
         var options = {
             url: url,
             contentType: response.contentType,
-            body: response.contentType,
+            body: response.text,
             method: 'post'
         };
 
