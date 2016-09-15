@@ -24,6 +24,7 @@
         var params = req.body.text || undefined,
             responseUrl = req.param("response_url");
         console.log(responseUrl);
+        console.log(req.originalUrl);
         bot.respond(params, function(response) {
             res.header("Content-Type", response.contentType);
             res.end(response.text);
