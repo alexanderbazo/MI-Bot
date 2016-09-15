@@ -21,11 +21,12 @@
     }
 
     function sendResponseMessage(url, response) {
+      console.log(url);
+      console.log(response);
         var options = {
             url: url,
             contentType: response.contentType,
             body: response.contentType,
-            json: true,
             method: 'post'
         };
 
