@@ -1,7 +1,7 @@
 # MiBot
-A simple API for slack/mettermost *Slash Commands* used by the Media Informatics Group
+A simple API for slack/mettermost *Slash Commands* used by the Media Informatics Group. Description in German.
 
-** Slack rendert kein Markdown. Die Antworten der Bots sind daher möglicherweise schlecht lesbar. Als Workaround könnten Bilder erstellt und als Attatchment in den Chat gesendet werden.**
+**Slack rendert kein Markdown. Die Antworten der Bots sind daher möglicherweise schlecht lesbar. Als Workaround könnten Bilder erstellt und als Attatchment in den Chat gesendet werden.**
 
 ## Nutzung in Slack/Mattermost
 
